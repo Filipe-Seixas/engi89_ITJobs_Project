@@ -20,3 +20,15 @@ body {
 .navbar-collapse {
     justify-content: flex-end;
 }
+.table td {
+   text-align: center;
+}
+.table th {
+   text-align: center;
+}
+.list-group{
+    max-height: 300px;
+    margin-bottom: 10px;
+    overflow:auto;
+    -webkit-overflow-scrolling: touch;
+}
