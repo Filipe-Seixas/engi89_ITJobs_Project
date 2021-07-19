@@ -8,9 +8,9 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/table/")
+@app.route("/results/")
 def table():
-    return render_template("table.html")
+    return render_template("job_results.html")
 
 
 if __name__ == "__main__":
