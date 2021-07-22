@@ -1,0 +1,19 @@
+
+
+Vagrant.configure("2") do |config|
+  
+  config.vm.define "web" do |web|
+	web.vm.box = "ubuntu/xenial64"
+    web.vm.network "private_network", ip: "192.168.10.120"
+	web.vm.hostname = "web"
+	web.vm.provider "virtualbox" do |web|
+	  #the VM will be named as job_proj
+	  web.name = "job_proj"
+	end
+	web.vm.synced_folder "flask_app/", "/opt/vagrant/flask_app"
+	web.vm.synced_folder "environment/", "/opt/vagrant/environment"
+	web.vm.provision "shell", path: "environment/provision.sh"
+	
+  end
+
+end

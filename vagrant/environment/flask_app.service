@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance to serve flask_app
+After=network.target
+
+[Service]
+User=vagrant
+Group=www-data
+WorkingDirectory=/home/vagrant/flask_app
+ExecStart=/usr/local/bin/gunicorn --workers 3 --bind unix:/home/vagrant/flask_app/flask_app.sock main:flask_app
+
+[Install]
+WantedBy=multi-user.target
