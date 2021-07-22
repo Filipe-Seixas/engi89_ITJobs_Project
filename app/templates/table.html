@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends "base.html" %} <!-- header -->
+
+{% block content %}
+
+    <body>
+
+    <div class="container mt-4">
+        <div class="justify-content-md-center">
+            <h1>DevOps Engineer</h1>
+            <p>30 Job entries</p>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-md-center">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Median Salary (£)</th>
+                    <th scope="col">Historical Permanent Job ads</th>
+                    <th scope="col">Live Jobs</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in job %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+	</body>
+
+</html>
+{% endblock %}
