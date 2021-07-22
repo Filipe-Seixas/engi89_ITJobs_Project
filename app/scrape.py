@@ -34,11 +34,9 @@ for job in jobs:
     # Get the required data but only the text, also replace any unwanted special characters
     title = job.find('td', class_='c2').text.replace(" ", "_").replace("#", "_Sharp").replace(".", "dot_").replace("-", "_").replace("(", "").replace(")", "").replace("+", "_Plus")
     rank = job.find('td', class_='c3').text
-    med_salary = job.find('td', class_='c5').text.replace("£", "")
-    median_salary_change = job.find('td', class_='c6').text
-    hist_ads = job.find('td', class_='c7').text.split(sep, 1)[0]
+    med_salary = float(job.find('td', class_='c5').text.replace("£", "").replace(",", ""))
+    hist_ads = job.find('td', class_='c7').text.replace(",", "").split(sep, 1)[0]
     live_jobs = job.find('td', class_='c8').text.replace(",", "")
-
     # # Print it out
     # print(f'''
     #     Job Title: {title}

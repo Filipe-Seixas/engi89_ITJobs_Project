@@ -23,8 +23,13 @@ body {
 }
 .table td {
    text-align: center;
+
 }
 .table th {
+   text-align: center;
+}
+
+.table tr {
    text-align: center;
 }
 .list-group{

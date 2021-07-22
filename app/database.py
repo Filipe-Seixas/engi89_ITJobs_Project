@@ -1,8 +1,8 @@
 import sqlite3
+import csv
 
 
 class Database:
-
     # Connect to Database
     db = sqlite3.connect('C:/Users/M/PycharmProjects/Job Search/app/test_jobs.db', check_same_thread=False)
     dbc = db.cursor()
@@ -26,12 +26,22 @@ class Database:
         for job in all_jobs:
             self.dbc.execute(f'SELECT live_jobs FROM {job} ORDER BY live_jobs DESC LIMIT 1')
             for i in self.dbc.fetchall():
-                data.append((job,i[0]))
+                data.append((job, i[0]))
         sorted_by_second = sorted(data, key=lambda tup: tup[1], reverse=True)[:30]
         print(sorted_by_second)
-        with open('live_jobs.csv', 'w') as f:
-            for value in sorted_by_second:
-                f.write("%s,%s\n" % value)
+        try:
+            with open('live_jobs.csv', 'r+') as f:
+                data = f.read()
+                f.seek(0)
+                f.write("Job Title,Live Jobs\n")
+                for value in sorted_by_second:
+                    f.write("%s,%s\n" % value)
+                f.truncate()
+        except:
+            with open('live_jobs.csv', 'w') as f:
+                f.write("Job Title,Live Jobs\n")
+                for value in sorted_by_second:
+                    f.write("%s,%s\n" % value)
         return sorted_by_second
 
     # Get Top 30 jobs by rank and save to csv file
@@ -44,9 +54,20 @@ class Database:
                 data.append((job, i[0]))
         sorted_by_second = sorted(data, key=lambda tup: tup[1])[:30]
         print(sorted_by_second)
-        with open('job_ranks.csv', 'w') as f:
-            for value in sorted_by_second:
-                f.write("%s,%s\n" % value)
+
+        try:
+            with open('job_ranks.csv', 'r+') as f:
+                data = f.read()
+                f.seek(0)
+                f.write("Job Title,Rank\n")
+                for value in sorted_by_second:
+                    f.write("%s,%s\n" % value)
+                f.truncate()
+        except:
+            with open('job_ranks.csv', 'w') as f:
+                f.write("Job Title,Rank\n")
+                for value in sorted_by_second:
+                    f.write("%s,%s\n" % value)
         return sorted_by_second
 
     def all_data(self):
@@ -57,8 +78,7 @@ class Database:
             for i in self.dbc.fetchall():
                 data.append((job, i[0]))
         print(data)
-        return(data)
-
+        return (data)
 
     def get_jobs(self):
         jobs_list = []
@@ -75,14 +95,41 @@ class Database:
         data = []
         self.dbc.execute(f'SELECT * FROM {job} ORDER BY date DESC LIMIT 30')
         for i in self.dbc.fetchall():
-            data.append((i[0],i[1],i[2],i[3],i[4]))
+            data.append((i[0], i[1], "{:.2f}".format(float(i[2])), i[3], i[4]))
             sorted_by_date = sorted(data, key=lambda tup: tup[1])[:30]
             # print(sorted_by_date)
+
+            try:
+                with open('job.csv', 'r+') as f:
+                    data_read = f.read()
+                    f.seek(0)
+                    f.write("Date,Rank,Median Salary (£),Historical Permanent Job ads,Live Jobs\n")
+                    for value in sorted_by_date:
+                        f.write("%s,%s,%s,%s,%s\n" % value)
+                    f.truncate()
+                    print(".")
+            except:
+                with open('job.csv', 'w') as f:
+                    f.write("Date,Rank,Median Salary (£),Historical Permanent Job ads,Live Jobs\n")
+                    for value in sorted_by_date:
+                        f.write("%s,%s,%s,%s,%s\n" % value)
+                    print("0")
+
         return sorted_by_date
 
 
-d = Database()
-#d.top_live_jobs1()
-#d.top_rank1()
+# import csv
+#
+# f = open("fruits.csv", "w")
+# writer = csv.DictWriter(
+#     f, fieldnames=["fruit", "count"])
+# writer.writeheader()
+# f.close()
+# Outputfruits.csvfruit,count
+
+
+# d = Database()
+# d.top_live_jobs1()
+# d.top_rank1()
 
 
