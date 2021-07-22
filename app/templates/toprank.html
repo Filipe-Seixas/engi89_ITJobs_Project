@@ -17,21 +17,15 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Date</th>
+                    <th scope="col">Job Title</th>
                     <th scope="col">Rank</th>
-                    <th scope="col">Median Salary (£)</th>
-                    <th scope="col">Historical Permanent Job ads</th>
-                    <th scope="col">Live Jobs</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for row in job %}
+                {% for job in jobs %}
                 <tr>
-                    <td>{{row[0]}}</td>
-                    <td>{{row[1]}}</td>
-                    <td>{{row[2]}}</td>
-                    <td>{{row[3]}}</td>
-                    <td>{{row[4]}}</td>
+                    <td>{{job[0]}}</td>
+                    <td>{{job[1]}}</td>
                 </tr>
                 {% endfor %}
                 </tbody>

@@ -7,8 +7,8 @@
     <p>Click on a job to find details.</p>
     <div class="container mt-4">
         <div class="list-group">
-            {% for job in jobs %}
-            <a href="/{{job}}" class="list-group-item list-group-item-action">{{job}}</a>
+            {% for title in jobs %}
+            <a href="/job/{{title}}" class="list-group-item list-group-item-action">{{title}}</a>
             {% endfor %}
         </div>
     </div>

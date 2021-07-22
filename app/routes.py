@@ -13,11 +13,21 @@ def index():
     return render_template("index.html", jobs=jobs_list)
 
 
-@flask_app.route("/job/")
-def table():
-    jobs_list = dt.all_data()
-    return render_template("table.html", jobs=jobs_list)
+@flask_app.route("/job/<title>")
+def table(title):
+    jobs_list = dt.load_job(title)
+    return render_template("table.html", job=jobs_list)
 
+@flask_app.route("/toprank")
+def toprank():
+    jobs_list = dt.top_rank1()
+    return render_template("toprank.html", jobs=jobs_list)
+
+@flask_app.route("/toplive")
+def toplive():
+    jobs_list = dt.top_live_jobs1()
+    return render_template("toplive.html", jobs=jobs_list)
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
+
