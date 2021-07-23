@@ -6,10 +6,18 @@ body {
 .navbar {
     background:#6ab446;
 }
-.nav-link,
+
 .navbar-brand {
     color: #fff;
     cursor: pointer;
+}
+
+.nav-item a {
+    text-decoration: none;
+}
+
+.nav-link {
+    color: #000
 }
 
 .nav-link:hover {
@@ -18,7 +26,7 @@ body {
 .navbar-collapse {
     justify-content: flex-end;
 }
-}
+
 .table td {
    text-align: center;
 
