@@ -1,4 +1,3 @@
-from app.database import Database
 from bs4 import BeautifulSoup
 import requests
 import sqlite3
@@ -8,7 +7,25 @@ from datetime import date
 # Get today's date and create Database class object
 today = date.today()
 formatted_date = today.strftime("%d/%m/%Y")
-data_bs = Database()
+
+# Connect to Database
+db = sqlite3.connect('app/test_jobs.db', check_same_thread=False)
+dbc = db.cursor()
+
+
+# Create Table
+def database_initialise(job_title):
+    db.execute(f'CREATE TABLE IF NOT EXISTS {job_title} (date DATETIME, rank INTEGER, median_salary DOUBLE, '
+               f'hist_perm_job INTEGER, live_jobs INTEGER)')
+
+
+# Populate Tables with data
+def add_jobs(job_date, job_title, job_rank, job_median_sal, job_hist_ads, jobs_live):
+    db.execute(
+        f'INSERT INTO {job_title} (date, rank, median_salary, hist_perm_job, live_jobs) VALUES ("{job_date}", '
+        f'"{job_rank}", "{job_median_sal}", "{job_hist_ads}", "{jobs_live}")')
+    db.commit()
+    print(f"Python Variables inserted successfully into {job_title} ")
 
 
 # --- SCRAPING --- #
@@ -47,7 +64,7 @@ for job in jobs:
     #     Live Jobs: {live_jobs}
     #     ''')
 
-    data_bs.database_initialise(title)
-    data_bs.add_jobs(formatted_date, title, rank, med_salary, hist_ads, live_jobs)
+    database_initialise(title)
+    add_jobs(formatted_date, title, rank, med_salary, hist_ads, live_jobs)
 
-data_bs.db.close()
+db.close()
