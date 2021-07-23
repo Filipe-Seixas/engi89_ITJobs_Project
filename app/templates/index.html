@@ -2,18 +2,21 @@
 
 {% block content %}
 
-<div class="content-flask">
-    <h1>Top IT Jobs</h1>
-    <p>Click on a job to find details.</p>
+<body>
+<div class="container mt-4">
     <div class="container mt-4">
-        <div class="list-group">
+        <h1>Top IT Jobs</h1>
+        <i class="subtitle">Click on a job to find details.</i>
+    </div>
+    <div class="container mt-4">
+        <div class="list-group border border-secondary rounded">
             {% for title in jobs %}
             <a href="/job/{{title}}" class="list-group-item list-group-item-action">{{title}}</a>
             {% endfor %}
         </div>
     </div>
 </div>
-
+</body>
 
 
 

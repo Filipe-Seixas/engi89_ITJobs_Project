@@ -11,9 +11,7 @@ body {
     color: #fff;
     cursor: pointer;
 }
-.nav-link {
-    margin-right: 1em !important;
-}
+
 .nav-link:hover {
     color: #000;
 }
@@ -37,3 +35,15 @@ body {
     margin-bottom: 10px;
     overflow:auto;
     -webkit-overflow-scrolling: touch;
+}
+
+.list-group-item:hover {
+    background-color: #D9FFBE;
+}
+
+.subtitle{
+    color: #B0B0B0;
+}
+
+.csv_download{
+}

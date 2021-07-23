@@ -4,7 +4,7 @@ import csv
 
 class Database:
     # Connect to Database
-    db = sqlite3.connect('C:/Users/M/PycharmProjects/Job Search/app/test_jobs.db', check_same_thread=False)
+    db = sqlite3.connect('C:/Users/pabfi/Desktop/project_folder/app/test_jobs.db', check_same_thread=False)
     dbc = db.cursor()
 
     # Create Table
@@ -28,7 +28,6 @@ class Database:
             for i in self.dbc.fetchall():
                 data.append((job, i[0]))
         sorted_by_second = sorted(data, key=lambda tup: tup[1], reverse=True)[:30]
-        print(sorted_by_second)
         try:
             with open('live_jobs.csv', 'r+') as f:
                 data = f.read()
@@ -53,7 +52,6 @@ class Database:
             for i in self.dbc.fetchall():
                 data.append((job, i[0]))
         sorted_by_second = sorted(data, key=lambda tup: tup[1])[:30]
-        print(sorted_by_second)
 
         try:
             with open('job_ranks.csv', 'r+') as f:
@@ -77,7 +75,6 @@ class Database:
             self.dbc.execute(f'SELECT * FROM {job}')
             for i in self.dbc.fetchall():
                 data.append((job, i[0]))
-        print(data)
         return (data)
 
     def get_jobs(self):
@@ -107,14 +104,11 @@ class Database:
                     for value in sorted_by_date:
                         f.write("%s,%s,%s,%s,%s\n" % value)
                     f.truncate()
-                    print(".")
             except:
                 with open('job.csv', 'w') as f:
                     f.write("Date,Rank,Median Salary (£),Historical Permanent Job ads,Live Jobs\n")
                     for value in sorted_by_date:
                         f.write("%s,%s,%s,%s,%s\n" % value)
-                    print("0")
-
         return sorted_by_date
 
 
