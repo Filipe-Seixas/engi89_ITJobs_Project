@@ -1,3 +1,4 @@
+Job Title,Rank
 Agile_Software_Development,1
 Developer,2
 Social_Skills,3
@@ -20,8 +21,8 @@ Degree,19
 HTML,20
 CSS,21
 Analyst,22
+Windows,23
 Kubernetes,24
-Windows,24
 Linux,25
 Microservices,26
 Scrum,27
